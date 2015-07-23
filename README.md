@@ -1,4 +1,10 @@
 # Battleship
 Battleship for Windows and Unix Systems
 
-Currently in Version 1.0. Single Player only for console or terminal.
+Current Status:
+
+Version 1.2. 
+Single Player
+ASCII based
+limited menu functionality
+Customization coming soon
