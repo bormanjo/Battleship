@@ -3,12 +3,12 @@ Battleship for Windows and Unix Systems
 
 Current Status:
 
-- Version 1.2.1 
+- Version 1.3 
 
 - Single Player
 
 - ASCII based
 
-- limited menu functionality
+- Fully functional main menu
 
-- Customization coming soon
+- Fully customizeable settings
