@@ -41,7 +41,6 @@ class Settings(object):
         self.reset()
         with open('Settings.ini', 'w') as configfile:
             config.write(configfile)
-        
     def run(self):
         clear()
         increment = 1
