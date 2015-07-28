@@ -1,4 +1,3 @@
 Welcome to Battleship, developed by Bormanjo.
 Github address: https://github.com/bormanjo
-
 Thanks for playing!
