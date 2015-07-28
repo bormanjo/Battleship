@@ -5,10 +5,8 @@ try:
     from configparser import ConfigParser
 except ImportError:
     from ConfigParser import ConfigParser
-
+    
 config = ConfigParser()
-config.read('Settings.ini')
-
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 def get_user_input(prompt, dataType):
@@ -25,6 +23,25 @@ class Settings(object):
     def __init__(self):
         self.settingsDict = {1:'player_turns', 2:'num_enemy_ships', 3:'board_size', 4:'debug'}
         
+    def start(self):
+        try:
+            settings_file = open('Settings.ini')
+        except FileNotFoundError:
+            settings_file = open('Settings.ini', 'w+')
+            settings_file.write('[Settings]')
+        settings_file.close()
+
+        try:
+            about_file = open('About.txt')
+        except FileNotFoundError:
+            about_file = open('About.txt', 'w+')
+            about_file.write('Welcome to Battleship, developed by Bormanjo.\nGithub address: https://github.com/bormanjo\nThanks for playing!')
+        about_file.close()
+        config.read('Settings.ini')
+        self.reset()
+        with open('Settings.ini', 'w') as configfile:
+            config.write(configfile)
+        
     def run(self):
         clear()
         increment = 1
@@ -36,7 +53,7 @@ class Settings(object):
             clear()
             newGame.inSettings = False
         elif settingsChoice == 4:
-            input("Switch Debug on/off")
+            input("Hit enter to switch Debug on/off")
             if not config.getboolean('Settings', 'debug'):
                 config.set('Settings', 'debug', 'true')
             else:
@@ -46,6 +63,7 @@ class Settings(object):
             self.change_value(settingsChoice, valueChoice)
             if not self.validate_settings():
                 self.reset()
+                print("***Error: Invalid entry. Settings reset.***")
         else:
             print("That is not a valid entry. Try again.")
         with open('Settings.ini', 'w') as configfile:
@@ -63,7 +81,6 @@ class Settings(object):
         else:
             return True
     def reset(self):
-        print("***Error: Invalid entry. Settings reset.***")
         config.set('Settings', 'player_turns', '8')
         config.set('Settings', 'num_enemy_ships', '3')
         config.set('Settings', 'board_size', '6')
@@ -190,6 +207,7 @@ class Player(object):
 #Menu
 newGame = Game()
 newSettings = Settings()
+newSettings.start()
 while newGame.inProgram:
     
     while newGame.inMenu:
@@ -242,21 +260,3 @@ while newGame.inProgram:
                 break
            
         newGame.play_again()
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
